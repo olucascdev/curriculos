@@ -5,38 +5,39 @@ on:
     branches:
       - main
     paths:
-      - '**.tex'        # só roda quando um .tex for alterado
-  workflow_dispatch:    # permite rodar manualmente pela UI do GitHub
+      - '**.tex'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write   # necessário para fazer commit do PDF gerado
+      contents: write
 
     steps:
       - name: Checkout repositório
         uses: actions/checkout@v4
 
-      - name: Compilar LaTeX → PDF
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: curriculo.tex   # ← altere para o nome do seu arquivo .tex
-          latexmk_use_xelatex: true  # xelatex: suporte a UTF-8 e fontes modernas
-          # Alternativas: comente a linha acima e descomente uma das abaixo:
-          # latexmk_use_lualatex: true
-          # (sem flag = pdflatex padrão)
-
-      - name: Mover PDF para pasta /docs
+      - name: Compilar todos os .tex → PDF
         run: |
           mkdir -p docs
-          mv curriculo.pdf docs/curriculo.pdf
+          for texfile in *.tex; do
+            echo "Compilando: $texfile"
+            docker run --rm \
+              -v "$PWD":/workspace \
+              -w /workspace \
+              ghcr.io/xu-cheng/texlive-full:latest \
+              latexmk -pdf -xelatex -interaction=nonstopmode "$texfile"
+            pdfname="${texfile%.tex}.pdf"
+            mv "$pdfname" "docs/$pdfname"
+            echo "✓ $pdfname gerado"
+          done
 
-      - name: Commit e push do PDF gerado
+      - name: Commit e push dos PDFs gerados
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "ci: atualiza curriculo.pdf compilado [skip ci]"
-          file_pattern: docs/curriculo.pdf
+          commit_message: "ci: atualiza PDFs compilados [skip ci]"
+          file_pattern: docs/*.pdf
           commit_user_name: "github-actions[bot]"
           commit_user_email: "github-actions[bot]@users.noreply.github.com"
