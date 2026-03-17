@@ -21,7 +21,8 @@ jobs:
 
       - name: Compilar todos os .tex → PDF
         run: |
-          mkdir -p docs
+          rm -rf docs
+          mkdir docs
           for texfile in *.tex; do
             echo "Compilando: $texfile"
             docker run --rm \
