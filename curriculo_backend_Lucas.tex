@@ -1,0 +1,210 @@
+% GitHub Repo and Documentation: https://github.com/celiobjunior/resume-template
+% Copyright © 2025 Celio B Junior. All rights reserved.
+% 
+% Licensed under the Apache License, Version 2.0 (the "License");
+% you may not use this file except in compliance with the License.
+% You may obtain a copy of the License at
+%
+%     http://www.apache.org/licenses/LICENSE-2.0
+%
+% This template follows best practices from README.md
+
+\documentclass[a4paper,10pt]{article}
+
+% --- PACOTES: BASE / IDIOMA ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+
+% --- PACOTES: LAYOUT / TIPOGRAFIA ---
+\usepackage{geometry}
+\usepackage{parskip}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{tabularx}
+
+% --- PACOTES: LINKS / BOOKMARKS ---
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{xurl}
+
+% --- CONFIGURAÇÃO: MARGENS / ESPAÇAMENTO ---
+\geometry{top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm}
+\setcounter{secnumdepth}{0}
+\setlist[itemize]{
+    leftmargin=0.75em,
+    itemsep=0.2em,
+    topsep=0.25em,
+    parsep=0em,
+    partopsep=0em
+}
+
+\pagestyle{empty}
+
+% --- CONFIGURAÇÃO: METADADOS / LINKS ---
+\hypersetup{
+    pdftitle={CV Lucas Correia da Silva},
+    pdfauthor={Lucas Correia da Silva},
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=black,
+    citecolor=black,
+    bookmarksdepth=2
+}
+
+% --- CONFIGURAÇÃO: TÍTULOS ---
+\titleformat{\section}
+{\Large\bfseries}
+{}
+{0em}
+{}
+[\titlerule\vspace{0.5ex}]
+\titleformat{\subsection}
+{\normalsize\bfseries}
+{}
+{0em}
+{}
+\titlespacing*{\subsection}{0pt}{0.35em}{0.15em}
+
+% Macro para entradas do currículo com bookmark no PDF
+\newcounter{cventry}
+\newcommand{\cventry}[4]{%
+    \refstepcounter{cventry}%
+    \phantomsection%
+    \pdfbookmark[2]{#1}{cventry-\thecventry}%
+    \noindent\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X >{\raggedleft\arraybackslash}X@{}}
+    \textbf{#1} & #2 \\
+    \textit{#3} & \textit{#4} \\
+    \end{tabularx}
+}
+
+% --- INÍCIO DO DOCUMENTO ---
+\begin{document}
+
+% --- CABEÇALHO ---
+% FIX ATS: separadores em texto puro (| ao invés de \textbullet)
+% evita concatenação de campos pelo parser
+\begin{center}
+    {\LARGE \textbf{Lucas Correia da Silva}}
+    \\ [0.1cm]
+    Vitória, ES
+    { | }
+    \href{mailto:lucasdevproject@gmail.com}{lucasdevproject@gmail.com}
+    { | }
+    \href{https://www.linkedin.com/in/olucascdev/}{linkedin.com/in/olucascdev}
+    { | }
+    \href{https://github.com/olucascdev}{github.com/olucascdev}
+\end{center}
+
+% --- SEÇÕES ---
+
+\section{Objetivo}
+Desenvolvedor Back-End Jr com experiência no desenvolvimento de sistemas web, automações, integrações e soluções orientadas a APIs. Atuação com PHP, Python e Go, utilizando frameworks modernos, Docker e arquitetura escalável para construção de aplicações robustas, organizadas e eficientes.
+
+% ------
+
+\section{Experiência}
+
+\cventry{EVA Tecnologia}{Vitória, ES}{Desenvolvedor de Software}{Jan 2026 -- Atual}
+\begin{itemize}
+    \item Atuação no desenvolvimento de soluções de automação e integração de sistemas utilizando Python, Agno e ferramentas baseadas em IA.
+    \item Criação de fluxos inteligentes com n8n para atendimento automatizado e otimização de processos internos.
+    \item Utilização de Docker e arquitetura orientada a APIs para garantir escalabilidade, organização e eficiência dos serviços.
+\end{itemize}
+
+\cventry{JN Desenvolvimento de Sistemas LTDA}{Vitória, ES}{Desenvolvedor de Software Jr Full Stack}{Abr 2025 -- Out 2025}
+\begin{itemize}
+    \item Desenvolvimento de sistemas web sob medida para diferentes nichos empresariais utilizando Laravel e Filament.
+    \item Implementação de arquitetura multitenancy para garantir escalabilidade e isolamento seguro de dados entre múltiplos clientes.
+    \item Integração com APIs de terceiros, incluindo pagamentos, autenticação e serviços externos, promovendo interoperabilidade entre sistemas.
+    \item Criação de dashboards administrativos, fluxos automatizados e interfaces dinâmicas com foco em performance e usabilidade.
+    \item Estruturação de regras de negócio e otimização de processos internos, reduzindo retrabalho e aumentando a eficiência operacional.
+\end{itemize}
+
+\cventry{Perbras}{Vitória, ES}{Estagiário de TI}{Ago 2024 -- Abr 2025}
+\begin{itemize}
+    \item Desenvolvimento de soluções internas voltadas à automação de processos operacionais, contribuindo para o aumento da produtividade das equipes e redução de custos.
+    \item Atuação em suporte técnico em sistemas industriais críticos, garantindo alta disponibilidade e rápida resolução de incidentes.
+    \item Integração e otimização de fluxos de trabalho, melhorando a eficiência dos sistemas utilizados em campo.
+    \item Criação de treinamentos imersivos em Realidade Virtual com C\# e Unity voltados à capacitação técnica e segurança operacional.
+\end{itemize}
+
+% ------
+
+\section{Projetos}
+
+% FIX ATS: datas adicionadas em todos os projetos para evitar confusão no parser de linha do tempo
+
+\cventry{Illie}{Projeto Pessoal}{Assistente pessoal de conteúdo com IA}{2025 -- Atual}
+\begin{itemize}
+    \item Assistente pessoal de conteúdo que transforma estudos e projetos escritos no Notion em posts prontos para o LinkedIn, automaticamente, no estilo do usuário.
+    \item Monitora páginas do Notion marcadas como prontas, reescreve o conteúdo como um post autêntico e armazena tudo em banco de dados para revisão via dashboard web.
+    \item Tecnologias: Python, Agno, Kestra, PostgreSQL, Next.js e Docker.
+\end{itemize}
+
+\cventry{Edully -- Sistema de Gestão Educacional}{Projeto Pessoal / Sob Demanda}{Sistema de gestão educacional}{2024 -- Atual}
+\begin{itemize}
+    \item Sistema de gestão educacional desenvolvido para integrar processos acadêmicos, financeiros e administrativos.
+    \item Possui múltiplos painéis por perfil de usuário e arquitetura escalável baseada em RBAC.
+    \item Tecnologias: Laravel, Filament, PHP, Livewire, TailwindCSS, PostgreSQL, Docker e MinIO.
+\end{itemize}
+
+\cventry{Assistente de Qualificação de Leads com IA}{Desafio Técnico}{Sistema inteligente de qualificação de leads}{2025}
+\begin{itemize}
+    \item Sistema desenvolvido com agentes de IA para conduzir conversas naturais, coletar informações estratégicas e gerar relatórios estruturados com score de qualificação.
+    \item Integra base de conhecimento, cálculo automático de orçamentos e armazenamento de histórico.
+    \item Tecnologias: Python, Agno e SQLite.
+\end{itemize}
+
+\cventry{Fórum de Comunidades (Clone Reddit)}{Desafio Técnico}{Aplicação full stack inspirada no Reddit}{2024}
+\begin{itemize}
+    \item Aplicação com criação dinâmica de comunidades, publicação de conteúdos em Markdown, comentários e sistema de votos.
+    \item Inclui painel administrativo para gerenciamento, com foco em modelagem de dados, arquitetura e organização de código.
+    \item Tecnologias: PHP, Laravel, Filament, Blade, TailwindCSS, PostgreSQL e Docker.
+\end{itemize}
+
+\cventry{LunchTube}{Projeto Pessoal}{Extensão de navegador}{2024}
+\begin{itemize}
+    \item Extensão de navegador focada em otimizar momentos de pausa, eliminando o tempo gasto na escolha de vídeos no YouTube.
+    \item Tecnologias: JavaScript, HTML e CSS.
+\end{itemize}
+
+\cventry{BugTracker}{Projeto Pessoal}{Sistema de monitoramento e gestão de erros}{2025}
+\begin{itemize}
+    \item Sistema de monitoramento e gestão de erros em atendimentos automatizados por IA.
+    \item Permite análise de qualidade, priorização de falhas e acompanhamento de métricas como taxa de assertividade, volume de atendimentos e recorrência de erros.
+    \item Possui visões separadas para equipe técnica e cliente.
+    \item Tecnologias: Laravel, Filament, Docker e PostgreSQL.
+\end{itemize}
+
+% ------
+
+\section{Habilidades}
+\begin{itemize}
+    \item \textbf{Back-end:} Go, Python, PHP
+    \item \textbf{Frameworks:} Gin, Laravel, Filament, Flask, FastAPI, Agno
+    \item \textbf{Banco de Dados:} PostgreSQL, MySQL, MongoDB, Redis
+    \item \textbf{Infrastructure \& DevOps:} Docker, Linux Servers, VPS Deployment, CI/CD, GitHub Actions, Kestra
+    \item \textbf{Front-end:} HTML, CSS, JavaScript, TailwindCSS, Next.js
+    \item \textbf{Arquitetura:} RESTful APIs, Microservices, Multitenancy
+    \item \textbf{Idiomas:} Português (Nativo), Inglês (B1)
+\end{itemize}
+
+% ------
+
+\section{Educação}
+
+\cventry{Centro Universitário Vale do Cricaré -- UNIVC}{Vitória, ES}{CTS em Análise e Desenvolvimento de Sistemas}{Atualmente -- 5º Período}
+\begin{itemize}
+    \item Participação ativa na Jornada Científica Semestral da Universidade, contribuindo para apresentações, discussões acadêmicas e projetos interdisciplinares.
+\end{itemize}
+
+\cventry{Universidade Federal do Espírito Santo -- UFES}{Espírito Santo, Brasil}{Ciência da Computação, Bacharelado (Incompleto)}{Ago 2023 -- Maio 2024}
+\begin{itemize}
+    \item Membro da empresa júnior Adapti na área de Design e Marketing.
+    \item Vencedor na categoria de calouros do Campeonato de Programação (MAPCOM).
+\end{itemize}
+
+\end{document}
