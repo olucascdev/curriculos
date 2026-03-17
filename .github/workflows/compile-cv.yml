@@ -21,8 +21,6 @@ jobs:
 
       - name: Compilar todos os .tex → PDF
         run: |
-          rm -rf docs
-          mkdir docs
           for texfile in *.tex; do
             echo "Compilando: $texfile"
             docker run --rm \
@@ -30,15 +28,13 @@ jobs:
               -w /workspace \
               ghcr.io/xu-cheng/texlive-full:latest \
               latexmk -pdf -xelatex -interaction=nonstopmode "$texfile"
-            pdfname="${texfile%.tex}.pdf"
-            mv "$pdfname" "docs/$pdfname"
-            echo "✓ $pdfname gerado"
+            echo "✓ ${texfile%.tex}.pdf gerado"
           done
 
       - name: Commit e push dos PDFs gerados
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "ci: atualiza PDFs compilados [skip ci]"
-          file_pattern: docs/*.pdf
+          file_pattern: "*.pdf"
           commit_user_name: "github-actions[bot]"
           commit_user_email: "github-actions[bot]@users.noreply.github.com"
