@@ -31,10 +31,17 @@ jobs:
             echo "✓ ${texfile%.tex}.pdf gerado"
           done
 
-      - name: Commit e push dos PDFs gerados
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "ci: atualiza PDFs compilados [skip ci]"
-          file_pattern: "*.pdf"
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+      - name: Deletar release anterior (latest)
+        run: |
+          gh release delete latest --cleanup-tag --yes || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publicar PDFs como Release
+        run: |
+          gh release create latest *.pdf \
+            --title "Currículos — $(date +'%d/%m/%Y')" \
+            --notes "Gerado automaticamente via GitHub Actions." \
+            --latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
